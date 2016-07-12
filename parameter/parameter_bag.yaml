@@ -1,0 +1,14 @@
+node_name: catkinpkg_framework_node                            # name of the node
+
+subscribed_rostopic_img: /camX/image_raw                       # subscribed rostopic
+queue_size_subscriber_img: 1                                   # queue size of the subscriber
+
+pub_rostopic_objects: detection_result                         # published rostopic
+queue_size_pub_objects: 500                                    # queue size of the publisher
+
+subscribed_rostopic_calib: /camX/calibration                   # subscribed rostopic
+queue_size_subscriber_calib: 1                                 # queue size of the subscriber
+
+subscribed_rostopic_cam: camera_info                           # subscribed rostopic
+queue_size_subscriber_cam: 1                                   # queue size of the subscriber
+
