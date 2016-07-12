@@ -7,22 +7,25 @@
 
 #include <string>
 
-struct ParameterBag
-{
+namespace framework {
+
+struct ParameterBag {
   // Parameter specific to parameter bag
   std::string node_name;
 
-  std::string subscribed_rostopic_img;
-  int queue_size_subscriber_img;
+  std::string sub_rostopic_img;
+  int queue_size_sub_img;
 
-  std::string subscribed_rostopic_cam;
-  int queue_size_subscriber_cam;
+  std::string sub_rostopic_cam;
+  int queue_size_sub_cam;
 
   std::string pub_rostopic_objects;
   int queue_size_pub_objects;
 
-  std::string subscribed_rostopic_calib;
-  int queue_size_subscriber_calib;
+  std::string pub_rostopic_img;
+  int queue_size_pub_img;
 };
+
+} // namespace framework
 
 #endif //CATKINPKG_FRAMEWORK_PARAMETER_BAG_H

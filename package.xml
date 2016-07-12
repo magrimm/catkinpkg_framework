@@ -16,4 +16,5 @@
   <depend>roscpp</depend>
   <depend>std_msgs</depend>
   <depend>roslib</depend>
+  <depend>image_transport</depend>
 </package>

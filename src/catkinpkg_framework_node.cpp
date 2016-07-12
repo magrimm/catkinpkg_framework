@@ -2,18 +2,31 @@
 // Created by marius on 16.04.16.
 //
 
-#include "catkinpkg_framework/parameter/parameter_bag.h"
 #include "catkinpkg_framework/framework_processor.h"
+
+namespace framework {
 
 void InitializeParameters(const ros::NodeHandle& nh, ParameterBag* parameter) {
   // Retrieve all parameters or set to default
-  nh.param("subscribed_rostopic_img", parameter->subscribed_rostopic_img, kDefaultImageSubTopic);
-  nh.param("queue_size_subscriber_img", parameter->queue_size_subscriber_img, kDefaultImageSubQueueSize);
-  nh.param("subscribed_rostopic_cam", parameter->subscribed_rostopic_cam, kDefaultCamSubTopic);
-  nh.param("queue_size_subscriber_cam", parameter->queue_size_subscriber_cam, kDefaultCamSubQueueSize);
-  nh.param("pub_rostopic_objects", parameter->pub_rostopic_objects, kDefaultObjectsPubTopic);
-  nh.param("queue_size_pub_objects", parameter->queue_size_pub_objects, kDefaultObjectsPubQueueSize);
+  nh.param("subscribed_rostopic_img", parameter->sub_rostopic_img,
+           kDefaultImageSubTopic);
+  nh.param("queue_size_subscriber_img", parameter->queue_size_sub_img,
+           kDefaultImageSubQueueSize);
+  nh.param("subscribed_rostopic_cam", parameter->sub_rostopic_cam,
+           kDefaultCamSubTopic);
+  nh.param("queue_size_subscriber_cam", parameter->queue_size_sub_cam,
+           kDefaultCamSubQueueSize);
+  nh.param("pub_rostopic_objects", parameter->pub_rostopic_objects,
+           kDefaultObjectsPubTopic);
+  nh.param("queue_size_pub_objects", parameter->queue_size_pub_objects,
+           kDefaultObjectsPubQueueSize);
+  nh.param("pub_rostopic_img", parameter->pub_rostopic_img,
+           kDefaultObjectsPubTopic);
+  nh.param("queue_size_pub_img", parameter->queue_size_pub_img,
+           kDefaultObjectsPubQueueSize);
 }
+
+} // namespace framework
 
 int main (int argc, char** argv)
 {
@@ -22,14 +35,14 @@ int main (int argc, char** argv)
   ros::NodeHandle nh;
 
   // Initialize parameter structure
-  ParameterBag parameter;
-  InitializeParameters(nh, &parameter);
+  framework::ParameterBag parameter;
+  framework::InitializeParameters(nh, &parameter);
 
-  // Construct class detection_processor with ros::NodeHandle and parameter structure
-  FrameworkProcessor framework(nh, parameter);
+  // Construct class detection_processor with NodeHandle and parameter structure
+  framework::FrameworkProcessor framework(nh, parameter);
 
   // Relative path to package
-  std::string strimg = ros::package::getPath("catkinpkg_framework");
+  std::string path = ros::package::getPath("catkinpkg_framework");
 
   // Spin
   ros::spin ();
